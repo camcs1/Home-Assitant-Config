@@ -1,0 +1,144 @@
+- id: wled_speed
+  alias: wled_speed
+  trigger:
+  - entity_id: input_number.ledspeed
+    platform: state
+  condition: []
+  action:
+  - data_template:
+      topic: wled/all/api
+      payload: SX={{ states('input_number.ledspeed') | int }}
+    service: mqtt.publish
+- id: wled_intensity
+  alias: wled_intensity
+  trigger:
+  - entity_id: input_number.ledintensity
+    platform: state
+  condition: []
+  action:
+  - data_template:
+      topic: wled/all/api
+      payload: IX={{ states('input_number.ledintensity') | int }}
+    service: mqtt.publish
+- id: wled_palette
+  alias: WLED Palette
+  trigger:
+  - platform: state
+    entity_id: input_select.wled_palette_list
+  condition: []
+  action:
+  - service: mqtt.publish
+    data_template:
+      topic: wled/all/api
+      payload: "{{ states('input_select.wled_palette_list') }}"
+- id: wled_presets
+  alias: WLED Presets
+  trigger:
+  - platform: state
+    entity_id: input_select.wled_presets
+  condition: []
+  action:
+  - service: mqtt.publish
+    data_template:
+      topic: wled/all/api
+      payload: "{{ states('input_select.wled_presets') }}"
+- alias: MiLight Forwarder
+  initial_state: True
+  trigger:
+    platform: mqtt
+    topic: milight/updates/0x1A75/rgb_cct/+
+  action:
+    - service: mqtt.publish
+      data_template:
+        topic: "milight/commands/0x1B75/rgb_cct/{{ trigger.topic.split('/')[4] }}"
+        payload_template: >
+          {{ trigger.payload }}
+- alias: MilightAll
+  initial_state: True
+  trigger:
+    platform: mqtt
+    topic: milight/updates/0x1A75/rgb_cct/0
+  action:
+    - service: mqtt.publish
+      data_template:
+        topic: "milight/commands/0x1B75/rgb_cct/1"
+        payload_template: >
+          {{ trigger.payload }}
+    - service: mqtt.publish
+      data_template:
+        topic: "milight/commands/0x1B75/rgb_cct/2"
+        payload_template: >
+          {{ trigger.payload }}
+    - service: mqtt.publish
+      data_template:
+        topic: "milight/commands/0x1B75/rgb_cct/3"
+        payload_template: >
+          {{ trigger.payload }}
+    - service: mqtt.publish
+      data_template:
+        topic: "milight/commands/0x1B75/rgb_cct/4"
+        payload_template: >
+          {{ trigger.payload }}
+- alias: MiLight Wall Remote
+  initial_state: True
+  trigger:
+    platform: mqtt
+    topic: milight/updates/0x6B5F/rgb_cct/+
+  action:
+    - service: mqtt.publish
+      data_template:
+        topic: "milight/commands/0x1B75/rgb_cct/{{ trigger.topic.split('/')[4] }}"
+        payload_template: >
+          {{ trigger.payload }}
+- alias: MilightWallAll
+  initial_state: True
+  trigger:
+    platform: mqtt
+    topic: milight/updates/0x6B5F/rgb_cct/0
+  action:
+    - service: mqtt.publish
+      data_template:
+        topic: "milight/commands/0x1B75/rgb_cct/1"
+        payload_template: >
+          {{ trigger.payload }}
+    - service: mqtt.publish
+      data_template:
+        topic: "milight/commands/0x1B75/rgb_cct/2"
+        payload_template: >
+          {{ trigger.payload }}
+    - service: mqtt.publish
+      data_template:
+        topic: "milight/commands/0x1B75/rgb_cct/3"
+        payload_template: >
+          {{ trigger.payload }}
+    - service: mqtt.publish
+      data_template:
+        topic: "milight/commands/0x1B75/rgb_cct/4"
+        payload_template: >
+          {{ trigger.payload }}
+- alias: "Wake me up with bedroom light transition for weekdays"
+  trigger:
+    platform: template
+    value_template: "{{ states('sensor.time') == (states.input_datetime.wakeup_time.attributes.timestamp | int | timestamp_custom('%H:%M', False)) }}"
+  condition:
+    - condition: state
+      entity_id: input_boolean.wakeup_enabled
+      state: 'on'
+    - condition: or
+      conditions:
+        - condition: state
+          entity_id: input_boolean.wakeup_weekend
+          state: 'on'
+        - condition: time
+          weekday:
+            - mon
+            - tue
+            - wed
+            - thu
+            - fri
+  action:
+    - service: light.turn_on
+      entity_id: light.milightsselect
+      data:
+        transition: 600
+        brightness: 255

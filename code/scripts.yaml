@@ -1,0 +1,247 @@
+kodi_party:
+  alias: Kodi Party Mode
+  sequence:
+  - service: kodi.call_method
+    data:
+      entity_id: media_player.kodi
+      method: Player.SetPartymode
+      playerid: 0
+      partymode: true
+  - service: script.turn_on
+    data:
+      entity_id: script.rave
+clear:
+  alias: clear
+  sequence:
+  - service: kodi.call_method
+    data:
+      entity_id: media_player.kodi
+      method: Playlist.Clear
+      playlistid: 0
+add:
+  alias: add
+  sequence:
+  - service: kodi.call_method
+    data:
+      entity_id: media_player.kodi
+      method: Playlist.Add
+      params:
+        playerid: 0
+        playlistid: 0
+        item:
+          directory: special://profile/playlists/music/UKF.xsp
+play:
+  alias: play
+  sequence:
+  - service: kodi.call_method
+    data:
+      entity_id: media_player.kodi
+      method: Player.Open
+      item:
+        playlistid: 0
+stop:
+  alias: stop
+  sequence:
+  - service: kodi.call_method
+    data:
+      entity_id: media_player.kodi
+      method: Player.Stop
+ukf2020:
+  alias: UKF2020
+  sequence:
+  - service: kodi.call_method
+    data:
+      entity_id: media_player.kodi
+      method: Playlist.Clear
+      playlistid: 0
+  - service: kodi.add_to_playlist
+    data:
+      entity_id: media_player.kodi
+      media_type: ALBUM
+      media_id: 170
+  - service: kodi.call_method
+    data:
+      entity_id: media_player.kodi
+      method: Player.Open
+      item:
+        playlistid: 0
+        position: 0
+  - service: light.turn_off
+    data:
+      entity_id: light.milights
+      transition: 10
+  - service: switch.turn_on
+    data:
+      entity_id: switch.ledfx
+  - service: light.turn_on
+    data:
+      entity_id: light.wled
+dreamy:
+  alias: Dreamy
+  sequence:
+  - data:
+      entity_id: media_player.kodi
+      method: Playlist.Clear
+      playlistid: 0
+    service: kodi.call_method
+  - data:
+      entity_id: media_player.kodi
+      media_id: 122
+      media_type: ALBUM
+    service: kodi.add_to_playlist
+  - data:
+      entity_id: media_player.kodi
+      item:
+        playlistid: 0
+      method: Player.Open
+    service: kodi.call_method
+modestep:
+  alias: modestep
+  sequence:
+  - data:
+      entity_id: media_player.kodi
+      method: Playlist.Clear
+      playlistid: 0
+    service: kodi.call_method
+  - data:
+      entity_id: media_player.kodi
+      media_id: 61
+      media_type: ALBUM
+    service: kodi.add_to_playlist
+  - data:
+      entity_id: media_player.kodi
+      item:
+        playlistid: 0
+      method: Player.Open
+    service: kodi.call_method
+burnout:
+  alias: burnout
+  sequence:
+  - data:
+      entity_id: media_player.kodi
+      method: Playlist.Clear
+      playlistid: 0
+    service: kodi.call_method
+  - data:
+      entity_id: media_player.kodi
+      media_id: 12
+      media_type: ALBUM
+    service: kodi.add_to_playlist
+  - data:
+      entity_id: media_player.kodi
+      item:
+        playlistid: 0
+      method: Player.Open
+    service: kodi.call_method
+mteden:
+  alias: Mt Eden
+  sequence:
+  - data:
+      entity_id: media_player.kodi
+      method: Playlist.Clear
+      playlistid: 0
+    service: kodi.call_method
+  - data:
+      entity_id: media_player.kodi
+      media_id: 62
+      media_type: ALBUM
+    service: kodi.add_to_playlist
+  - data:
+      entity_id: media_player.kodi
+      item:
+        playlistid: 0
+      method: Player.Open
+    service: kodi.call_method
+skyrim:
+  alias: Skyrim
+  sequence:
+  - data:
+      entity_id: media_player.kodi
+      method: Playlist.Clear
+      playlistid: 0
+    service: kodi.call_method
+  - data:
+      entity_id: media_player.kodi
+      media_id: 168
+      media_type: ALBUM
+    service: kodi.add_to_playlist
+  - data:
+      entity_id: media_player.kodi
+      item:
+        playlistid: 0
+      method: Player.Open
+    service: kodi.call_method
+mando:
+  alias: The Mandalorian
+  sequence:
+  - data:
+      entity_id: media_player.kodi
+      method: Playlist.Clear
+      playlistid: 0
+    service: kodi.call_method
+  - data:
+      entity_id: media_player.kodi
+      media_id: 162
+      media_type: ALBUM
+    service: kodi.add_to_playlist
+  - data:
+      entity_id: media_player.kodi
+      item:
+        playlistid: 0
+      method: Player.Open
+    service: kodi.call_method
+raveon:
+  alias: Dim Lights Activate LedFx
+  sequence:
+  - service: light.turn_off
+    data:
+      entity_id: light.milights
+      transition: 6
+  - service: switch.turn_on
+    data:
+      entity_id: switch.ledfx
+  - service: light.turn_on
+    data:
+      entity_id: light.wled
+raveoff:
+  alias: Deactivate LedFx
+  sequence:
+  - service: light.turn_on
+    data:
+      entity_id: light.milightsselect
+      transition: 6
+  - service: switch.turn_off
+    data:
+      entity_id: switch.ledfx
+  - service: light.turn_off
+    data:
+      entity_id: light.wled
+  - service: kodi.call_method
+    data:
+      entity_id: media_player.kodi
+      method: Player.Stop
+fanhack:
+  alias: Turn the Fan on from deep sleep
+  sequence:
+  - service: switch.turn_on
+    data:
+      entity_id: switch.swing
+  - service: switch.turn_on
+    data:
+      entity_id: switch.fan
+easein:
+  alias: Fade the lights on
+  sequence:
+  - data:
+      entity_id: light.milightsselect
+      transition: 60
+    entity_id: light.milightsselect
+    service: light.turn_on
+easeout:
+  alias: Fade the lights off
+  sequence:
+  - data:
+      entity_id: light.milights
+      transition: 60
+    entity_id: light.milights
+    service: light.turn_off
