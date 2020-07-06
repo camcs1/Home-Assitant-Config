@@ -32,7 +32,7 @@
         ledfx:
             command_on: "/usr/bin/curl -L -X PUT 'http://192.168.0.15:8888/api/presets' --data-raw '{\"id\":\"subbass\",\"action\":\"activate\"}'"
             command_off: "/usr/bin/curl -L -X DELETE 'http://192.168.0.15:8888/api/devices/set-to-no-segments-before-use/effects'"
-            command_state: "/usr/bin/curl -L -X GET '192.168.0.16/json/info'"
+            command_state: "/usr/bin/curl -L -X GET '192.168.0.4/json/info'"
             value_template: '{{ value_json.live }}'
             friendly_name: LedFx
   - platform: template
@@ -71,3 +71,14 @@
           service: script.toggle
           data:
             entity_id: script.raveoff
+  - platform: mqtt
+    name: "Big Fan"
+    state_topic: "mqttsockets/status/EC:FA:BC:5F:1A:C1/1"
+    command_topic: "mqttsockets/change/EC:FA:BC:5F:1A:C1/1"
+    payload_on: "true"
+    payload_off: "false"
+    state_on: "true"
+    state_off: "false"
+    optimistic: false
+    qos: 0
+    retain: true
