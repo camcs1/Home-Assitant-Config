@@ -30,7 +30,7 @@
   - service: mqtt.publish
     data_template:
       topic: wled/all/api
-      payload: "{{ states('input_select.wled_palette_list') }}"
+      payload: '{{ states(''input_select.wled_palette_list'') }}'
 - id: wled_presets
   alias: WLED Presets
   trigger:
@@ -41,104 +41,176 @@
   - service: mqtt.publish
     data_template:
       topic: wled/all/api
-      payload: "{{ states('input_select.wled_presets') }}"
+      payload: '{{ states(''input_select.wled_presets'') }}'
 - alias: MiLight Forwarder
-  initial_state: True
+  initial_state: true
   trigger:
     platform: mqtt
     topic: milight/updates/0x1A75/rgb_cct/+
   action:
-    - service: mqtt.publish
-      data_template:
-        topic: "milight/commands/0x1B75/rgb_cct/{{ trigger.topic.split('/')[4] }}"
-        payload_template: >
-          {{ trigger.payload }}
+  - service: mqtt.publish
+    data_template:
+      topic: milight/commands/0x1B75/rgb_cct/{{ trigger.topic.split('/')[4] }}
+      payload_template: '{{ trigger.payload }}
+
+        '
+  id: 5326fdd5087a4adcb7758366a55fcbe5
 - alias: MilightAll
-  initial_state: True
+  initial_state: true
   trigger:
     platform: mqtt
     topic: milight/updates/0x1A75/rgb_cct/0
   action:
-    - service: mqtt.publish
-      data_template:
-        topic: "milight/commands/0x1B75/rgb_cct/1"
-        payload_template: >
-          {{ trigger.payload }}
-    - service: mqtt.publish
-      data_template:
-        topic: "milight/commands/0x1B75/rgb_cct/2"
-        payload_template: >
-          {{ trigger.payload }}
-    - service: mqtt.publish
-      data_template:
-        topic: "milight/commands/0x1B75/rgb_cct/3"
-        payload_template: >
-          {{ trigger.payload }}
-    - service: mqtt.publish
-      data_template:
-        topic: "milight/commands/0x1B75/rgb_cct/4"
-        payload_template: >
-          {{ trigger.payload }}
+  - service: mqtt.publish
+    data_template:
+      topic: milight/commands/0x1B75/rgb_cct/1
+      payload_template: '{{ trigger.payload }}
+
+        '
+  - service: mqtt.publish
+    data_template:
+      topic: milight/commands/0x1B75/rgb_cct/2
+      payload_template: '{{ trigger.payload }}
+
+        '
+  - service: mqtt.publish
+    data_template:
+      topic: milight/commands/0x1B75/rgb_cct/3
+      payload_template: '{{ trigger.payload }}
+
+        '
+  - service: mqtt.publish
+    data_template:
+      topic: milight/commands/0x1B75/rgb_cct/4
+      payload_template: '{{ trigger.payload }}
+
+        '
+  id: bfba1df920894ffaa8525d3147c854ed
 - alias: MiLight Wall Remote
-  initial_state: True
+  initial_state: true
   trigger:
     platform: mqtt
     topic: milight/updates/0x6B5F/rgb_cct/+
   action:
-    - service: mqtt.publish
-      data_template:
-        topic: "milight/commands/0x1B75/rgb_cct/{{ trigger.topic.split('/')[4] }}"
-        payload_template: >
-          {{ trigger.payload }}
+  - service: mqtt.publish
+    data_template:
+      topic: milight/commands/0x1B75/rgb_cct/{{ trigger.topic.split('/')[4] }}
+      payload_template: '{{ trigger.payload }}
+
+        '
+  id: e51a5125247145c697190b3470a4e586
 - alias: MilightWallAll
-  initial_state: True
+  initial_state: true
   trigger:
     platform: mqtt
     topic: milight/updates/0x6B5F/rgb_cct/0
   action:
-    - service: mqtt.publish
-      data_template:
-        topic: "milight/commands/0x1B75/rgb_cct/1"
-        payload_template: >
-          {{ trigger.payload }}
-    - service: mqtt.publish
-      data_template:
-        topic: "milight/commands/0x1B75/rgb_cct/2"
-        payload_template: >
-          {{ trigger.payload }}
-    - service: mqtt.publish
-      data_template:
-        topic: "milight/commands/0x1B75/rgb_cct/3"
-        payload_template: >
-          {{ trigger.payload }}
-    - service: mqtt.publish
-      data_template:
-        topic: "milight/commands/0x1B75/rgb_cct/4"
-        payload_template: >
-          {{ trigger.payload }}
-- alias: "Wake me up with bedroom light transition for weekdays"
+  - service: mqtt.publish
+    data_template:
+      topic: milight/commands/0x1B75/rgb_cct/1
+      payload_template: '{{ trigger.payload }}
+
+        '
+  - service: mqtt.publish
+    data_template:
+      topic: milight/commands/0x1B75/rgb_cct/2
+      payload_template: '{{ trigger.payload }}
+
+        '
+  - service: mqtt.publish
+    data_template:
+      topic: milight/commands/0x1B75/rgb_cct/3
+      payload_template: '{{ trigger.payload }}
+
+        '
+  - service: mqtt.publish
+    data_template:
+      topic: milight/commands/0x1B75/rgb_cct/4
+      payload_template: '{{ trigger.payload }}
+
+        '
+  id: 4eb35eae47854330b973a335d33409e5
+- alias: Wake me up with bedroom light transition for weekdays
   trigger:
     platform: template
-    value_template: "{{ states('sensor.time') == (states.input_datetime.wakeup_time.attributes.timestamp | int | timestamp_custom('%H:%M', False)) }}"
+    value_template: '{{ states(''sensor.time'') == (states.input_datetime.wakeup_time.attributes.timestamp
+      | int | timestamp_custom(''%H:%M'', False)) }}'
   condition:
+  - condition: state
+    entity_id: input_boolean.wakeup_enabled
+    state: 'on'
+  - condition: or
+    conditions:
     - condition: state
-      entity_id: input_boolean.wakeup_enabled
+      entity_id: input_boolean.wakeup_weekend
       state: 'on'
-    - condition: or
-      conditions:
-        - condition: state
-          entity_id: input_boolean.wakeup_weekend
-          state: 'on'
-        - condition: time
-          weekday:
-            - mon
-            - tue
-            - wed
-            - thu
-            - fri
+    - condition: time
+      weekday:
+      - mon
+      - tue
+      - wed
+      - thu
+      - fri
   action:
-    - service: light.turn_on
-      entity_id: light.milightsselect
-      data:
-        transition: 600
-        brightness: 255
+  - service: light.turn_on
+    entity_id: light.milightsselect
+    data:
+      transition: 600
+      brightness: 255
+  id: 82c98f55cc1e4c0aa676c7921d3845cb
+- id: '1590187741446'
+  alias: Climate Fan On
+  description: ''
+  trigger:
+  - above: '24'
+    entity_id: sensor.bedroom_temprature
+    platform: numeric_state
+  condition:
+  - condition: state
+    entity_id: input_boolean.climate_overide
+    state: 'off'
+  action:
+  - data: {}
+    entity_id: switch.big_fan
+    service: switch.turn_on
+- id: '1590272486976'
+  alias: 'Climate Test Off '
+  description: ''
+  trigger:
+  - platform: time_pattern
+    seconds: /10
+  condition:
+  - condition: and
+    conditions:
+    - below: '25'
+      condition: numeric_state
+      entity_id: sensor.bedroom_temprature
+    - condition: state
+      entity_id: input_boolean.climate_overide
+      state: 'on'
+    - condition: state
+      entity_id: switch.big_fan
+      state: 'on'
+  action:
+  - data: {}
+    entity_id: switch.big_fan
+    service: switch.turn_off
+- id: '1590272706870'
+  alias: Climate Test On
+  description: ''
+  trigger:
+  - platform: time_pattern
+    seconds: /30
+  condition:
+  - condition: and
+    conditions:
+    - above: '25'
+      condition: numeric_state
+      entity_id: sensor.bedroom_temprature
+    - condition: state
+      entity_id: input_boolean.climate_overide
+      state: 'on'
+  action:
+  - data: {}
+    entity_id: switch.big_fan
+    service: switch.turn_on
