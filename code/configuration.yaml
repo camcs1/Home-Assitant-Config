@@ -9,6 +9,32 @@ default_config:
 # Text to speech
 tts:
   - platform: google_translate
+history: 
+  include:
+    entities:
+    - light.unit
+    - light.bedside
+    - light.front
+    - light.lamp
+    - light.top
+    - light.wled
+    - media_player.kodi
+    - sensor.moon
+    - sensor.pm2_5
+    - sensor.pm10
+    - sensor.n02
+    - sensor.bedroom_temprature
+    - sensor.dht_sensor_temperature
+    - sensor.dht_sensor_humidity
+    - sensor.london_overground
+    - sensor.northern
+    - sensor.qbittorrent_status
+    - sensor.qbittorrent_down_speed
+    - sensor.qbittorrent_up_speed
+    - sun.sun 
+    - switch.big_fan
+    - switch.fan
+    - switch.tv
 
 group: !include groups.yaml
 automation: !include automations.yaml
@@ -16,11 +42,14 @@ script: !include scripts.yaml
 scene: !include scenes.yaml
 # Sensors 
 sensor:
+  - platform: mqtt
+    name: "Bedroom Temprature"
+    state_topic: "sensor/temperature"
+    device_class: temperature
+    unit_of_measurement: '°C'
   - platform: sonarr
     api_key: secret
     host: 192.168.0.15
-    monitored_conditions:
-      - upcoming
     days: 2
   - platform: waqi
     token: secret
@@ -64,20 +93,22 @@ sensor:
   - platform: time_date
     display_options:
       - 'time'
+  - platform: systemmonitor
+    resources:
+      - type: disk_use_percent
+        arg: /home
+      - type: memory_free
 #Weather
 weather:
   - platform: darksky
     api_key: secret
     mode: daily
-
 #Discovery
 discovery:
 #Media Players
 media_player:
   - platform: kodi
     host: 192.168.0.15
-    username: secret
-    password: secret
 #Switches
 switch: !include switches.yaml
 #Lights
@@ -96,6 +127,20 @@ light:
       - light.lamp
       - light.unit
       - light.front
+  - platform: group
+    name: WLED_Complete
+    entities: 
+      - light.wled
+      - light.wled_1
+      - light.wled_2
+      - light.wled_3
+  - platform: group
+    name: WLED_Select
+    entities: 
+      - light.wled
+      - light.wled_2
+      - light.wled_3
+
   - platform: mqtt
     name: "WLED Lights"
     command_topic: "wled/all"
@@ -327,6 +372,9 @@ homekit:
           - sensor.dht_sensor_temperature
           - switch.ledfx
           - switch.milight_nightlight
+          - switch.big_fan
+          - input_boolean.climate_overide
+          - sensor.bedroom_temprature
     entity_config:
         media_player.kodi:
           feature_list:
