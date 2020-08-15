@@ -130,9 +130,10 @@
 
         '
   id: 4eb35eae47854330b973a335d33409e5
-- alias: Wake me up with bedroom light transition for weekdays
+- id: 82c98f55cc1e4c0aa676c7921d3845cb
+  alias: Wake me up with bedroom light transition for weekdays
   trigger:
-    platform: template
+  - platform: template
     value_template: '{{ states(''sensor.time'') == (states.input_datetime.wakeup_time.attributes.timestamp
       | int | timestamp_custom(''%H:%M'', False)) }}'
   condition:
@@ -152,12 +153,12 @@
       - thu
       - fri
   action:
-  - service: light.turn_on
-    entity_id: light.milightsselect
-    data:
-      transition: 600
+  - data:
       brightness: 255
-  id: 82c98f55cc1e4c0aa676c7921d3845cb
+      transition: 600
+    entity_id: light.milightsselect
+    service: light.turn_on
+  mode: single
 - id: '1590187741446'
   alias: Climate Fan On
   description: ''
@@ -214,3 +215,136 @@
   - data: {}
     entity_id: switch.big_fan
     service: switch.turn_on
+- id: '1595783626201'
+  alias: PS4 Audio Switcher
+  description: ''
+  trigger:
+  - platform: time_pattern
+    seconds: '10'
+  condition:
+  - condition: or
+    conditions:
+    - condition: state
+      entity_id: media_player.playstation_4
+      state: idle
+    - condition: state
+      entity_id: media_player.playstation_4
+      state: playing
+  action:
+  - data: {}
+    entity_id: switch.ps4audio
+    service: switch.turn_on
+  mode: single
+- id: '1595784064306'
+  alias: TV Audio Switcher
+  description: ''
+  trigger:
+  - platform: time_pattern
+    seconds: '10'
+  condition:
+  - condition: state
+    entity_id: media_player.playstation_4
+    state: standby
+  action:
+  - data: {}
+    entity_id: switch.ps4audio
+    service: switch.turn_off
+  mode: single
+- id: '1597163776632'
+  alias: Temprature Stable Off
+  description: ''
+  trigger:
+  - entity_id: binary_sensor.temp_rising
+    from: 'off'
+    platform: state
+    to: 'on'
+  - entity_id: binary_sensor.temp_falling
+    from: 'off'
+    platform: state
+    to: 'on'
+  condition: []
+  action:
+  - data: {}
+    entity_id: input_boolean.temprature_stable
+    service: input_boolean.turn_off
+  mode: single
+- id: '1597187359729'
+  alias: stable off
+  description: ''
+  trigger:
+  - platform: time_pattern
+    seconds: '30'
+  condition:
+  - condition: or
+    conditions:
+    - condition: state
+      entity_id: binary_sensor.temp_falling
+      state: 'on'
+    - condition: state
+      entity_id: binary_sensor.temp_rising
+      state: 'on'
+  action:
+  - data: {}
+    entity_id: input_boolean.temprature_stable
+    service: input_boolean.turn_off
+  mode: single
+- id: '1597187362134'
+  alias: stable off
+  description: ''
+  trigger:
+  - platform: time_pattern
+    seconds: '30'
+  condition:
+  - condition: or
+    conditions:
+    - condition: state
+      entity_id: binary_sensor.temp_falling
+      state: 'on'
+    - condition: state
+      entity_id: binary_sensor.temp_rising
+      state: 'on'
+  action:
+  - data: {}
+    entity_id: input_boolean.temprature_stable
+    service: input_boolean.turn_off
+  mode: single
+- id: '1597277741425'
+  alias: Temp Rising Notify Iphone
+  description: ''
+  trigger:
+  - entity_id: binary_sensor.temp_rising
+    for: '60'
+    from: 'off'
+    platform: state
+    to: 'on'
+  condition:
+  - after: '13:00'
+    before: 03:00
+    condition: time
+  action:
+  - data:
+      data:
+        group: heat
+      message: Bedroom Temprature {{ states.sensor.bedroom_temprature.state}}
+      title: Temprature Rising
+    service: notify.mobile_app_iphone
+  - delay: '15'
+  mode: single
+- id: '1597368073343'
+  alias: Temprature Stable On
+  description: ''
+  trigger:
+  - entity_id: binary_sensor.temp_rising
+    from: 'on'
+    platform: state
+    to: 'off'
+  - entity_id: binary_sensor.temp_falling
+    from: 'on'
+    platform: state
+    to: 'off'
+  condition: []
+  action:
+  - data: {}
+    entity_id: input_boolean.temprature_stable
+    service: input_boolean.turn_on
+  mode: single
