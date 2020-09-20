@@ -1,44 +1,45 @@
-
+#Broadlink
   - platform: broadlink
-    host: 192.168.0.20
     mac: '78:0F:77:00:03:75' 
     switches:
-        tv:
-            friendly_name: "TV"
+          - name:  TV
             command_on: 'JgCMAE8UKBMUFCgUExQpExMUFBQnFBQUFBMUFBQAA1FPFCkTExQoFBMUKBQUExQUKBMUFBQTFBQUAANSTxQoExQUJxQUFCcUFBQTFCgUFBMVExQTFQADUlATKBQUEygUFBMpExQTFBQoExQUFBQTFBQAA1NPFCgUExQoFBMUKBQUExQUKBMUFBQUExQUAA0FAAAAAAAAAAAAAAAA'
             command_off: 'JgCMAE8UKBMUFCgUExQpExMUFBQnFBQUFBMUFBQAA1FPFCkTExQoFBMUKBQUExQUKBMUFBQTFBQUAANSTxQoExQUJxQUFCcUFBQTFCgUFBMVExQTFQADUlATKBQUEygUFBMpExQTFBQoExQUFBQTFBQAA1NPFCgUExQoFBMUKBQUExQUKBMUFBQUExQUAA0FAAAAAAAAAAAAAAAA'
-        fan:
-            friendly_name: "Air Cooler"
+          - name:  Air Cooler
             command_on: 'JgBqASsOKg4NKisOLA0OKQ4pDykOKRAoDikr4ioPKg4QKCoPKQ8OKQ8pDikPKQ4pDykq4isOKg8PKCsOKg8OKBAoDikPKQ4pDykr4SwOKg0PKSoOKw4OKQ8oDykQJxAoDygs4S0NKQ4PKSsOKwsQKQ8oDykPKA8pDykr4SwOKg4OKSoPKg8OKA8pDikOKg4pDykq4isMLA0QKSoOKw0PKQ8pDygPKQ4pDioq4iwOKQ8PKCoPKg4OKQ8pDikPKA4qDygs4SsPKgsRKSsOKQ4PKQ8oDykOKQ8pDikr4isOKg8OKCwOKQ8PKA4pDioOKQ8pDiks4SsMLA8OKCsPKg4PKA4pDykPKBAoDikr4ioPKg4PKCsOKw4OKQ4pDykPKA8pDikr4ioPKg4OKSoPKg8OKA8pDikOKg4pDykq4isPKQ8PKCoPKg8NKRAoDikPKQ4pDykr3zAMKQ8OKSsOKg8OKA8oECgPKBEnDygrAA0FAAAAAAAAAAAAAAAAAAA'
             command_off: 'JgBqASsOKg4NKisOLA0OKQ4pDykOKRAoDikr4ioPKg4QKCoPKQ8OKQ8pDikPKQ4pDykq4isOKg8PKCsOKg8OKBAoDikPKQ4pDykr4SwOKg0PKSoOKw4OKQ8oDykQJxAoDygs4S0NKQ4PKSsOKwsQKQ8oDykPKA8pDykr4SwOKg4OKSoPKg8OKA8pDikOKg4pDykq4isMLA0QKSoOKw0PKQ8pDygPKQ4pDioq4iwOKQ8PKCoPKg4OKQ8pDikPKA4qDygs4SsPKgsRKSsOKQ4PKQ8oDykOKQ8pDikr4isOKg8OKCwOKQ8PKA4pDioOKQ8pDiks4SsMLA8OKCsPKg4PKA4pDykPKBAoDikr4ioPKg4PKCsOKw4OKQ4pDykPKA8pDikr4ioPKg4OKSoPKg8OKA8pDikOKg4pDykq4isPKQ8PKCoPKg8NKRAoDikPKQ4pDykr3zAMKQ8OKSsOKg8OKA8oECgPKBEnDygrAA0FAAAAAAAAAAAAAAAAAAA'
-        swing:
-            friendly_name: "swing"
+          - name:  swing
             command_on: 'JgDCACsOKg4PKSoNLA4qDw4oDykPKCsOKg4P+ysOKg0QKCwNKg8rDRAnECgPKCsOKg4P+ysOKg4PKCsOKw0rDg4pDykOKSwNKg4P+ysOKg4PKCwNKw0rDg4pDykOKSsNKw0Q+ysNKw4PKCsOKg4qDhAoDygQKCoOKw0P+ywNKg4PKSsNKg4rDg8oECgPKCsOKw0P+yoOKw4OKSsNKw4qDg8pDikPKSoOKw0P+ysOKg4PKSoOKw4rDQ8oDykPKCsOKg4PAA0FAAAAAAAA'
             command_off: 'JgDCACsOKg4PKSoNLA4qDw4oDykPKCsOKg4P+ysOKg0QKCwNKg8rDRAnECgPKCsOKg4P+ysOKg4PKCsOKw0rDg4pDykOKSwNKg4P+ysOKg4PKCwNKw0rDg4pDykOKSsNKw0Q+ysNKw4PKCsOKg4qDhAoDygQKCoOKw0P+ywNKg4PKSsNKg4rDg8oECgPKCsOKw0P+yoOKw4OKSsNKw4qDg8pDikPKSoOKw0P+ysOKg4PKSoOKw4rDQ8oDykPKCsOKg4PAA0FAAAAAAAA'
-        power:
-            friendly_name: "power"
+          - name:  power
             command_on: 'JgA6ASoOLAwPKSwMLA4OKA8pECcPKSoODykQ/CoOLAwPKSsOKw4OKQ4pECgOKSwLECkP/SsNKw4OKSsMLA4PKQ4pECgOKSsODikP/SoOKw4OKSsOKg8PJw8pDygPKSsNDykO/SsPKQ8PKCsOKw4OKA8pDygPKSsODygO+y4NKg4OKisNKw8NKQ8pDikPKSoODykP/CsOKg4PKSoOKw4NKg8pDikPKSoODykO/SsOKg4PKSwNKQ8OKQ8oDykPKCwODigQ/CwNKw4OKSoOLA4NKRAoDygQJysPDigP/SsPKQ8OKSoPKQ4PKQ8oDykPKCwODigQ/CoPKw4OKCsOKw0PKQ8oDykPKCsODikP/SsOKg8OKCwNKg8OKQ8oDykPKCwNDygP/SoOKw0QKCsPKQ4PKQ8oDykPKCsPDigPAA0FAAAAAAAAAAAAAAAAAAA='
             command_off: 'JgA6ASoOLAwPKSwMLA4OKA8pECcPKSoODykQ/CoOLAwPKSsOKw4OKQ4pECgOKSwLECkP/SsNKw4OKSsMLA4PKQ4pECgOKSsODikP/SoOKw4OKSsOKg8PJw8pDygPKSsNDykO/SsPKQ8PKCsOKw4OKA8pDygPKSsODygO+y4NKg4OKisNKw8NKQ8pDikPKSoODykP/CsOKg4PKSoOKw4NKg8pDikPKSoODykO/SsOKg4PKSwNKQ8OKQ8oDykPKCwODigQ/CwNKw4OKSoOLA4NKRAoDygQJysPDigP/SsPKQ8OKSoPKQ4PKQ8oDykPKCwODigQ/CoPKw4OKCsOKw0PKQ8oDykPKCsODikP/SsOKg8OKCwNKg8OKQ8oDykPKCwNDygP/SoOKw0QKCsPKQ4PKQ8oDykPKCsPDigPAA0FAAAAAAAAAAAAAAAAAAA='
-        wind:
-            friendly_name: "Wind Mode"
+          - name:  Wind Mode
             command_on: 'JgAKASsOKg8OKSoOKw0OKg8oKw8OKA8pDygQ+ysPKQ4PKSoPKg4OKQ8oKw4OKRAoDygQ+iwPKQ8NKioPKg8NKRAnKw8OKBAoDygQ/CoPKQ4PKSsNKwwQKQ8oKw8NKQ8oECgP/CsPKQ8OKSsNKg8OKQ8oKw4OKQ8pDikP/SoPKg4OKSoPKg8OKA8pKg8PKA4pECcP/SoPKg8OKCsMLA8OKA8pKg8PKA8oDykP/CsOKQ8OKSsPKg4PJw8pKwsSKA4pDykO/SsOKw0PKCsOKw4PKA4pKg8OKQ8oDykP/CwOKQ8OKCsPKQ8PKA8oKw8OKA8pDikQ/CoPKQ8OKSoPKg8NKQ8pKRAOKA8pDygPAA0FAAAAAAAAAAAAAAAAAAA='
             command_off: 'JgAKASsOKg8OKSoOKw0OKg8oKw8OKA8pDygQ+ysPKQ4PKSoPKg4OKQ8oKw4OKRAoDygQ+iwPKQ8NKioPKg8NKRAnKw8OKBAoDygQ/CoPKQ4PKSsNKwwQKQ8oKw8NKQ8oECgP/CsPKQ8OKSsNKg8OKQ8oKw4OKQ8pDikP/SoPKg4OKSoPKg8OKA8pKg8PKA4pECcP/SoPKg8OKCsMLA8OKA8pKg8PKA8oDykP/CsOKQ8OKSsPKg4PJw8pKwsSKA4pDykO/SsOKw0PKCsOKw4PKA4pKg8OKQ8oDykP/CwOKQ8OKCsPKQ8PKA8oKw8OKA8pDikQ/CoPKQ8OKSoPKg8NKQ8pKRAOKA8pDygPAA0FAAAAAAAAAAAAAAAAAAA='
-        timer:
-            friendly_name: "timer"
+          - name:  timer
             command_on: 'JgDyACoOLA0OKSsOKg4PKA8pDygrDg4pECcP/SsNLA0PKCsMLA4PKA8pECcrDg8oDykO/SsOKg4QJysOKg4PKQ8oECgrDQ8oDykP/SoOKw4PKCoOLA0OKQ8pDygrDQ8pDygP/SsNLA0OKSsNLA0PKA8pDikrDg8oDygP/SsOKg4PKCsOKg0QKQ8oDykqDg8pDikP/SoOKw4OKSoOLA0OKQ8pDygrDg4pDygP/SsNLA0PKCsOKg4PKQ4pDygsDQ8oDykP/CwNKw0PKSoOKw4OKQ8oDykqDg8pDygP/SsNKw4PKCsOKg4PKQ8oDygtDBAnDykQAA0FAAAAAAAA'
             command_off: 'JgDyACoOLA0OKSsOKg4PKA8pDygrDg4pECcP/SsNLA0PKCsMLA4PKA8pECcrDg8oDykO/SsOKg4QJysOKg4PKQ8oECgrDQ8oDykP/SoOKw4PKCoOLA0OKQ8pDygrDQ8pDygP/SsNLA0OKSsNLA0PKA8pDikrDg8oDygP/SsOKg4PKCsOKg0QKQ8oDykqDg8pDikP/SoOKw4OKSoOLA0OKQ8pDygrDg4pDygP/SsNLA0PKCsOKg4PKQ4pDygsDQ8oDykP/CwNKw0PKSoOKw4OKQ8oDykqDg8pDygP/SsNKw4PKCsOKg4PKQ8oDygtDBAnDykQAA0FAAAAAAAA'
+          - name:  Water
+            command_on: 'JgA4ACoOKw4PKCsOKg8OKQ8oDykQKA4pLA4O/SsPKBAOKioRJhQNKQwqDSsNKg4pLQoMAAEDKhcZAA0F'
+            command_off: 'JgA4ACoOKw4PKCsOKg8OKQ8oDykQKA4pLA4O/SsPKBAOKioRJhQNKQwqDSsNKg4pLQoMAAEDKhcZAA0F'
+          - name:  PS4 Audio
+            command_on: 'JgBQAAABJ5MUNxISFBETExITExESFBETExISNxM3EzcSOBI4EjcSOBMTEhISOBIUEhITEhITEjcTNxM3EhMSNxI4EjgTNxITEgAFHQABKEkTAA0FAAAAAAAAAAA='
+            command_off: 'JgBQAAABKZITNxISExMSExISExISExMSExISNxQ3EjcSOBM3EjcTNxQREhMSExQREjcTExITEjcSOBQ2EjcTNxQREjgUNhMSEgAFHQABKUgTAA0FAAAAAAAAAAA='
+#Command Line
   - platform: command_line
     switches:
         ledfx:
             command_on: "/usr/bin/curl -L -X PUT 'http://192.168.0.15:8888/api/presets' --data-raw '{\"id\":\"subbass\",\"action\":\"activate\"}'"
-            command_off: "/usr/bin/curl -L -X DELETE 'http://192.168.0.15:8888/api/devices/set-to-no-segments-before-use/effects'"
-            command_state: "/usr/bin/curl -L -X GET '192.168.0.4/json/info'"
+            command_off: "/usr/bin/curl -L -X DELETE 'http://192.168.0.15:8888/api/devices/wled1/effects'"
+            command_state: "/usr/bin/curl -L -X GET '192.168.0.7/json/info'"
             value_template: '{{ value_json.live }}'
             friendly_name: LedFx
+#Template
   - platform: template
     switches:
       achack:
-        value_template: "{{ is_state('switch.fan', 'on') }}"
+        value_template: "{{ is_state('switch.air_cooler', 'on') }}"
         turn_on:
           service: script.toggle
           data:
@@ -46,7 +47,8 @@
         turn_off:
           service: switch.turn_off
           data:
-            entity_id: switch.fan
+            entity_id: switch.air_cooler
+
   - platform: template
     switches:
       milight_nightlight:
@@ -59,6 +61,7 @@
           service: script.toggle
           data:
             entity_id: script.easeout
+
   - platform: template
     switches:
       rave:
@@ -71,6 +74,7 @@
           service: script.toggle
           data:
             entity_id: script.raveoff
+#MQTT
   - platform: mqtt
     name: "Big Fan"
     state_topic: "mqttsockets/status/EC:FA:BC:5F:1A:C1/1"
