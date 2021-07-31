@@ -1,146 +1,62 @@
-resources:
-  - type: js
-    url: /community_plugin/light-entity-card/light-entity-card.js
-  - type: js
-    url: /local/custom-lovelace/upcoming-media-card/upcoming-media-card.js
-  - type: module
-    url: /community_plugin/button-card/button-card.js
-  - type: module
-    url: /community_plugin/mini-media-player/mini-media-player-bundle.js
-  - type: module
-    url: /community_plugin/weather-card/weather-card.js
 title: Dashboard
 views:
   - badges: []
     cards:
       - cards:
-          - entity: light.wled_lights
-            header: WLED
-            type: 'custom:light-entity-card'
+          - cards:
+              - aspect_ratio: 2/1
+                entity: switch.tower_fan
+                icon: mdi:fan
+                name: Tower Fan
+                show_icon: true
+                show_state: false
+                state:
+                  - spin: true
+                    value: 'on'
+                type: custom:button-card
+              - aspect_ratio: 2/1
+                entity: switch.big_fan
+                icon: mdi:fan
+                name: Big Fan
+                show_icon: true
+                show_state: false
+                state:
+                  - spin: true
+                    value: 'on'
+                type: custom:button-card
+            type: horizontal-stack
+          - cards:
+              - aspect_ratio: 2/1
+                entity: input_boolean.climate_overide
+                icon: mdi:auto-fix
+                name: Auto Climate
+                show_icon: true
+                show_name: false
+                show_state: false
+                type: custom:button-card
+              - aspect_ratio: 2/1
+                entity: switch.tower_fan_display
+                icon: mdi:television-off
+                show_name: false
+                type: custom:button-card
+                show_state: false
+              - aspect_ratio: 2/1
+                entity: switch.tower_fan_speed
+                icon: mdi:signal
+                show_name: false
+                type: custom:button-card
+                show_state: false
+              - aspect_ratio: 2/1
+                entity: switch.tower_fan_swing
+                icon: mdi:arrow-left-right
+                show_name: false
+                type: custom:button-card
+                state_display: 'off'
+            type: horizontal-stack
           - entities:
-              - input_number.ledspeed
-              - input_number.ledintensity
-            type: entities
-          - cards:
-              - entities:
-                  - input_select.wled_palette_list
-                type: entities
-              - entities:
-                  - input_select.wled_presets
-                type: entities
-            type: horizontal-stack
-          - entity: switch.ledfx
-            icon_height: 50px
-            show_icon: true
-            icon: 'mdi:alarm-light-outline'
-            show_name: true
-            tap_action:
-              action: toggle
-            type: entity-button
-          - entities:
-              - entity: input_datetime.wakeup_time
-              - entity: input_boolean.wakeup_enabled
-              - entity: input_boolean.wakeup_weekend
-            title: Wakeup Lights
-            type: entities
-        type: vertical-stack
-      - cards:
-          - aspect_ratio: 1/1
-            entity: media_player.kodi
-            type: media-control
-          - cards:
-              - aspect_ratio: 1/1
-                entity: script.ukf2020
-                image: >-
-                  https://ukf-cdn-2ezlhsfwy1f.stackpathdns.com/wp-content/uploads/2014/03/ukf_logo_forweb_yellow.jpg
-                show_name: false
-                show_state: false
-                state_filter:
-                  'off': brightness(100%) saturate(1)
-                  'on': brightness(110%) saturate(1.2)
-                tap_action:
-                  action: toggle
-                type: picture-entity
-              - aspect_ratio: 1/1
-                entity: script.dreamy
-                image: 'https://i.imgur.com/LxCHYN0.jpg'
-                show_name: false
-                show_state: false
-                state_filter:
-                  'off': brightness(100%) saturate(1)
-                  'on': brightness(110%) saturate(1.2)
-                tap_action:
-                  action: toggle
-                type: picture-entity
-            type: horizontal-stack
-          - cards:
-              - aspect_ratio: 1/1
-                entity: script.modestep
-                image: >-
-                  https://brainlessbeats.files.wordpress.com/2012/12/modestep.jpg?w=920
-                show_name: false
-                show_state: false
-                state_filter:
-                  'off': brightness(100%) saturate(1)
-                  'on': brightness(110%) saturate(1.2)
-                tap_action:
-                  action: toggle
-                type: picture-entity
-              - aspect_ratio: 1/1
-                entity: script.kodi_party
-                image: >-
-                  https://cdn.shopify.com/s/files/1/0279/8335/products/D4Q3597_grande_d20e2084-91b6-48d2-92c8-0339b78c78cd_grande.png
-                show_name: false
-                show_state: false
-                state_filter:
-                  'off': brightness(100%) saturate(1)
-                  'on': brightness(110%) saturate(1.2)
-                tap_action:
-                  action: toggle
-                type: picture-entity
-            type: horizontal-stack
-        type: vertical-stack
-      - cards:
-          - aspect_ratio: 4/1
-            entity: switch.achack
-            icon: 'mdi:fan'
-            name: Air Cooler
-            show_icon: true
-            show_state: false
-            state:
-              - spin: true
-                value: 'on'
-            type: 'custom:button-card'
-          - cards:
-              - aspect_ratio: 2/1
-                entity: switch.timer
-                icon: 'mdi:camera-timer'
-                show_name: false
-                type: 'custom:button-card'
-              - aspect_ratio: 2/1
-                entity: switch.wind
-                icon: 'mdi:weather-windy'
-                show_name: false
-                type: 'custom:button-card'
-              - aspect_ratio: 2/1
-                entity: switch.power
-                icon: 'mdi:signal'
-                show_name: false
-                type: 'custom:button-card'
-              - aspect_ratio: 2/1
-                entity: switch.swing
-                icon: 'mdi:arrow-left-right'
-                show_name: false
-                type: 'custom:button-card'
-            type: horizontal-stack
-          - entity: switch.tv
-            icon_height: 50px
-            icon: 'mdi:television-classic'
-            show_icon: true
-            show_name: false
-            type: entity-button
-          - entities:
-              - entity: light.milights
+              - entity: light.milightsselect
+                name: MiLights
+                secondary_info: brightness
             type: entities
           - entities:
               - entity: light.unit
@@ -148,125 +64,586 @@ views:
               - entity: light.top
               - entity: light.front
               - entity: light.bedside
+            show_header_toggle: false
             type: entities
-          - entity: switch.milight_nightlight
+          - type: vertical-stack
+            cards:
+              - type: entities
+                entities:
+                  - entity: light.wled_master
+          - entities:
+              - entity: light.wled
+                name: WLED XBOX Zone
+              - entity: light.wled_segment_1
+                name: WLED Top Zone
+              - entity: light.wled_segment_2
+                name: WLED Bottle Zone
+              - entity: light.wled_segment_3
+                name: WLED PS4 Zone
+              - entity: select.wled_preset
+            show_header_toggle: false
+            type: entities
+        type: vertical-stack
+      - cards:
+          - type: custom:mini-media-player
+            entity: media_player.kodi
+            artwork: full-cover
+            name: Kodi
+            volume_stateless: true
+            icon: mdi:kodi
+            hide:
+              play_pause: false
+              play_stop: false
+              stop: false
+              mute: true
+            shortcuts:
+              columns: 4
+              buttons:
+                - icon: mdi:minecraft
+                  type: script
+                  id: script.kodi_playlist_test
+                - icon: mdi:weather-night
+                  type: script
+                  id: script.1625942409287
+                - type: script
+                  id: script.kodi_dub_playlist
+                  icon: mdi:waveform
+                - icon: mdi:hours-24
+                  type: script
+                  id: script.bbc_news
+          - type: custom:mini-media-player
+            entity: media_player.playstation_4
+            artwork: full-cover
+            name: PS4
+            icon: mdi:sony-playstation
+            source: full
+            hide:
+              play_pause: true
+              play_stop: true
+              stop: true
+              controls: true
+              volume: true
+              source: false
+            shortcuts:
+              hide_when_off: true
+              columns: 4
+              buttons:
+                - icon: mdi:close
+                  type: service
+                  id: ps4.send_command
+                  data:
+                    entity_id: media_player.playstation_4
+                    command: enter
+                - icon: mdi:checkbox-blank-circle-outline
+                  type: service
+                  id: ps4.send_command
+                  data:
+                    entity_id: media_player.playstation_4
+                    command: back
+                - icon: mdi:sony-playstation
+                  type: service
+                  id: ps4.send_command
+                  data:
+                    entity_id: media_player.playstation_4
+                    command: ps
+                - icon: mdi:speaker
+                  type: service
+                  id: switch.toggle
+                  data:
+                    entity_id: switch.ps4_audio
+          - entity: switch.tv
             hold_action:
               action: more-info
-            show_icon: true
-            icon: 'mdi:weather-night'
+            icon: mdi:television-classic
             icon_height: 50px
+            show_icon: true
             show_name: false
             tap_action:
               action: toggle
-            type: entity-button
+            type: button
         type: vertical-stack
       - cards:
+          - entity: sensor.bedroom_temprature
+            max: 50
+            min: 0
+            name: Current Temprature
+            severity:
+              green: 17
+              red: 30
+              yellow: 24
+            type: gauge
           - entities:
-              - entity: sensor.london_overground
-              - entity: sensor.northern
-            type: entities
-          - entity: weather.dark_sky
-            details: false
-            forecast: true
-            type: 'custom:weather-card'
-          - entities:
-              - entity: sensor.dht_sensor_temperature
-            hours_to_show: 24
-            refresh_interval: 0
-            title: Climate Downstairs
+              - entity: sensor.bedroom_temprature
+              - entity: sensor.dark_sky_temperature
+            hours_to_show: 12
+            refresh_interval: 5
             type: history-graph
+          - type: custom:button-card
+            aspect_ratio: 4/1
+            entity: fan.bedroom_air_purifier
+            icon: mdi:fan
+            name: Air Purifier
+            show_icon: true
+            show_state: false
+            hold_action:
+              action: more-info
+            state:
+              - spin: true
+                value: 'on'
+          - type: sensor
+            entity: sensor.bedroom_air_quality
+            icon: mdi:air-filter
+          - type: custom:button-card
+            aspect_ratio: 4/1
+            entity: script.manual_air_clean
+            icon: mdi:air-filter
+            show_icon: true
+            show_state: false
+        type: vertical-stack
+      - entity: weather.dark_sky
+        type: weather-forecast
+      - type: custom:sun-card
+        dark_mode: true
+      - cards:
           - entities:
               - entity: sensor.pm2_5
-                icon: 'mdi:apple-icloud'
+                icon: mdi:apple-icloud
               - entity: sensor.pm10
-                icon: 'mdi:apple-icloud'
+                icon: mdi:apple-icloud
               - entity: sensor.n02
-                icon: 'mdi:apple-icloud'
+                icon: mdi:apple-icloud
             show_icon: true
             show_name: true
             show_state: true
             type: glance
         type: vertical-stack
-    icon: 'mdi:home'
+      - cards:
+          - entity: switch.rave
+            icon: mdi:alarm-light-outline
+            icon_height: 50px
+            name: Party Mode
+            show_icon: true
+            show_name: true
+            tap_action:
+              action: toggle
+            type: entity-button
+          - type: conditional
+            conditions:
+              - entity: switch.rave
+                state: 'on'
+            card:
+              type: entities
+              entities:
+                - entity: input_select.ledfx_scene
+          - entity: switch.milight_nightlight
+            icon: mdi:weather-night
+            icon_height: 50px
+            name: Fade Lights
+            show_icon: true
+            show_name: true
+            tap_action:
+              action: toggle
+            type: entity-button
+        type: vertical-stack
+      - entities:
+          - entity: sensor.london_overground
+          - entity: sensor.northern
+        type: entities
+      - type: button
+        tap_action:
+          action: toggle
+        entity: switch.pond_pump
+        icon_height: 50px
+        icon: mdi:fountain
+    icon: mdi:home
     title: Home
   - badges: []
     cards:
       - cards:
-          - entity: light.unit
+          - brightness: true
+            brightness_icon: weather-sunny
+            child_card: false
+            color_picker: true
+            color_temp: true
+            color_wheel: true
+            consolidate_entities: false
+            entity: light.unit
+            full_width_sliders: false
             header: Side
-            type: 'custom:light-entity-card'
-          - entity: light.wled_lights
-            type: 'custom:light-entity-card'
-          - entities:
-              - input_number.ledspeed
-              - input_number.ledintensity
-            type: entities
-          - cards:
-              - entities:
-                  - input_select.wled_palette_list
-                type: entities
-              - entities:
-                  - input_select.wled_presets
-                type: entities
-            type: horizontal-stack
-          - entity: switch.wled_nightlight
-            icon_height: 50px
-            type: entity-button
+            hide_header: false
+            persist_features: false
+            shorten_cards: false
+            show_slider_percent: false
+            smooth_color_wheel: false
+            temperature_icon: thermometer
+            type: custom:light-entity-card
+            white_icon: file-word-box
+            white_value: true
+          - brightness: true
+            brightness_icon: weather-sunny
+            child_card: false
+            color_picker: true
+            color_temp: true
+            color_wheel: true
+            consolidate_entities: false
+            entity: light.lamp
+            full_width_sliders: false
+            header: Lamp
+            hide_header: false
+            persist_features: false
+            shorten_cards: false
+            show_slider_percent: false
+            smooth_color_wheel: false
+            temperature_icon: thermometer
+            type: custom:light-entity-card
+            white_icon: file-word-box
+            white_value: true
         type: vertical-stack
       - cards:
-          - entity: light.lamp
-            type: 'custom:light-entity-card'
-          - entity: light.bedside
-            type: 'custom:light-entity-card'
+          - brightness: true
+            brightness_icon: weather-sunny
+            child_card: false
+            color_picker: true
+            color_temp: true
+            color_wheel: true
+            consolidate_entities: false
+            entity: light.top
+            full_width_sliders: false
+            header: Top
+            hide_header: false
+            persist_features: false
+            shorten_cards: false
+            show_slider_percent: false
+            smooth_color_wheel: false
+            temperature_icon: thermometer
+            type: custom:light-entity-card
+            white_icon: file-word-box
+            white_value: true
+          - brightness: true
+            brightness_icon: weather-sunny
+            child_card: false
+            color_picker: true
+            color_temp: true
+            color_wheel: true
+            consolidate_entities: false
+            entity: light.front
+            full_width_sliders: false
+            header: Front
+            hide_header: false
+            persist_features: false
+            shorten_cards: false
+            show_slider_percent: false
+            smooth_color_wheel: false
+            temperature_icon: thermometer
+            type: custom:light-entity-card
+            white_icon: file-word-box
+            white_value: true
         type: vertical-stack
-      - brightness: true
-        brightness_icon: weather-sunny
-        color_picker: true
-        color_temp: true
-        color_wheel: true
-        effects_list:
-          - effect1
-          - effect2
-        entity: light.top
-        full_width_sliders: false
-        group: false
-        header: Top
+      - cards:
+          - brightness: true
+            brightness_icon: weather-sunny
+            child_card: false
+            color_picker: true
+            color_temp: true
+            color_wheel: true
+            consolidate_entities: false
+            entity: light.wled_segment_0
+            full_width_sliders: false
+            header: Xbox Zone
+            hide_header: false
+            persist_features: false
+            shorten_cards: false
+            show_slider_percent: false
+            smooth_color_wheel: false
+            temperature_icon: thermometer
+            type: custom:light-entity-card
+            white_icon: file-word-box
+            white_value: true
+          - brightness: true
+            brightness_icon: weather-sunny
+            child_card: false
+            color_picker: true
+            color_temp: true
+            color_wheel: true
+            consolidate_entities: false
+            entity: light.wled_segment_1
+            full_width_sliders: false
+            header: Top Zone
+            hide_header: false
+            persist_features: false
+            shorten_cards: false
+            show_slider_percent: false
+            smooth_color_wheel: false
+            temperature_icon: thermometer
+            type: custom:light-entity-card
+            white_icon: file-word-box
+            white_value: true
+        type: vertical-stack
+      - cards:
+          - brightness: true
+            brightness_icon: weather-sunny
+            child_card: false
+            color_picker: true
+            color_temp: true
+            color_wheel: true
+            consolidate_entities: false
+            effects_list: true
+            entity: light.wled_segment_2
+            full_width_sliders: false
+            header: Bottle Zone
+            hide_header: false
+            persist_features: false
+            shorten_cards: false
+            show_slider_percent: false
+            smooth_color_wheel: false
+            temperature_icon: thermometer
+            type: custom:light-entity-card
+            white_icon: file-word-box
+            white_value: true
+          - brightness: true
+            brightness_icon: weather-sunny
+            child_card: false
+            color_picker: true
+            color_temp: true
+            color_wheel: true
+            consolidate_entities: false
+            effects_list: true
+            entity: light.wled_segment_3
+            full_width_sliders: false
+            header: PS4 Zone
+            hide_header: false
+            persist_features: false
+            shorten_cards: false
+            show_slider_percent: false
+            smooth_color_wheel: false
+            temperature_icon: thermometer
+            type: custom:light-entity-card
+            white_icon: file-word-box
+            white_value: true
+        type: vertical-stack
+      - shorten_cards: false
+        consolidate_entities: false
+        color_wheel: false
         persist_features: false
-        show_slider_percent: false
+        brightness: false
+        color_temp: false
+        white_value: false
+        color_picker: false
         smooth_color_wheel: false
-        temperature_icon: thermometer
-        type: 'custom:light-entity-card'
-        white_icon: file-word-box
-        white_value: true
-      - brightness: true
-        brightness_icon: weather-sunny
-        color_picker: true
-        color_temp: true
-        color_wheel: true
-        effects_list:
-          - effect1
-          - effect2
-        entity: light.front
+        hide_header: false
+        child_card: false
+        show_slider_percent: false
         full_width_sliders: false
-        group: false
-        persist_features: false
-        show_slider_percent: false
-        smooth_color_wheel: false
-        temperature_icon: thermometer
-        type: 'custom:light-entity-card'
+        brightness_icon: weather-sunny
         white_icon: file-word-box
-        white_value: true
-    icon: 'mdi:lightbulb'
+        temperature_icon: thermometer
+        type: custom:light-entity-card
+        header: Outdoor_lights
+        entity: switch.outdoor_lights
+      - entity: switch.ledfx
+        hold_action:
+          action: none
+        icon: mdi:alarm-light-outline
+        icon_height: 50px
+        name: LedFX
+        show_icon: true
+        show_name: false
+        tap_action:
+          action: toggle
+        type: entity-button
+      - entity: light.prismatik
+        hold_action:
+          action: more-info
+        icon: mdi:record-rec
+        icon_height: 50px
+        show_icon: true
+        show_name: false
+        tap_action:
+          action: toggle
+        type: entity-button
+      - type: button
+        tap_action:
+          action: toggle
+        entity: script.long_fade_off
+        icon_height: 55px
+        show_name: false
+      - type: button
+        tap_action:
+          action: toggle
+        entity: script.long_fade
+        icon: mdi:weather-sunset-up
+        icon_height: 55px
+        show_name: false
+    icon: mdi:lightbulb
     path: lights
     title: Lights
+  - title: Times
+    path: times
+    icon: mdi:clock
+    badges: []
+    cards:
+      - type: entities
+        entities:
+          - entity: input_datetime.turn_on_outdoor_lights
+          - entity: input_datetime.turn_off_outdoor_lights
+      - entities:
+          - entity: input_boolean.wakeup_enabled
+          - entity: input_datetime.wakeup_time
+          - entity: input_boolean.wakeup_weekend
+        show_header_toggle: false
+        type: entities
+      - entities:
+          - entity: sensor.nextsunrise
+          - entity: sensor.nextsunset
+        show_header_toggle: false
+        type: entities
+  - icon: mdi:snowflake
+    path: climate
+    title: Climate
+    badges: []
+    cards:
+      - cards:
+          - entity: sensor.bedroom_temprature
+            max: 50
+            min: 0
+            name: Current Temprature
+            severity:
+              green: 17
+              red: 30
+              yellow: 24
+            type: gauge
+          - entities:
+              - entity: sensor.bedroom_temprature
+              - entity: sensor.downstairs_temp
+              - entity: sensor.dark_sky_temperature
+            hours_to_show: 24
+            refresh_interval: 0
+            type: history-graph
+        type: vertical-stack
+      - cards:
+          - cards:
+              - aspect_ratio: 2/1
+                entity: switch.achack
+                icon: mdi:fan
+                name: Air Cooler
+                show_icon: true
+                show_state: false
+                state:
+                  - spin: true
+                    value: 'on'
+                type: custom:button-card
+              - aspect_ratio: 2/1
+                entity: switch.big_fan
+                icon: mdi:fan
+                name: Big Fan
+                show_icon: true
+                show_state: false
+                state:
+                  - spin: true
+                    value: 'on'
+                type: custom:button-card
+            type: horizontal-stack
+          - cards:
+              - aspect_ratio: 1/1
+                entity: switch.timer
+                icon: mdi:camera-timer
+                show_name: false
+                type: custom:button-card
+              - aspect_ratio: 1/1
+                entity: switch.wind
+                icon: mdi:weather-windy
+                show_name: false
+                type: custom:button-card
+              - aspect_ratio: 1/1
+                entity: switch.power
+                icon: mdi:signal
+                show_name: false
+                type: custom:button-card
+              - aspect_ratio: 1/1
+                entity: switch.swing
+                icon: mdi:arrow-left-right
+                show_name: false
+                type: custom:button-card
+              - aspect_ratio: 1/1
+                entity: switch.water
+                icon: mdi:water-outline
+                show_name: false
+                type: custom:button-card
+            type: horizontal-stack
+          - aspect_ratio: 4/1
+            entity: input_boolean.climate_overide
+            icon: mdi:auto-fix
+            name: Auto Climate
+            show_icon: true
+            show_state: false
+            type: custom:button-card
+          - cards:
+              - card:
+                  aspect_ratio: 4/1
+                  entity: binary_sensor.temp_falling
+                  icon: mdi:arrow-down-bold
+                  type: custom:button-card
+                conditions:
+                  - entity: binary_sensor.temp_falling
+                    state: 'on'
+                type: conditional
+              - card:
+                  aspect_ratio: 4/1
+                  entity: binary_sensor.temp_rising
+                  icon: mdi:arrow-up-bold
+                  type: custom:button-card
+                conditions:
+                  - entity: binary_sensor.temp_rising
+                    state: 'on'
+                type: conditional
+              - card:
+                  aspect_ratio: 4/1
+                  entity: input_boolean.temprature_stable
+                  icon: mdi:arrow-left-right-bold
+                  type: custom:button-card
+                conditions:
+                  - entity: input_boolean.temprature_stable
+                    state: 'on'
+                type: conditional
+            type: horizontal-stack
+        type: vertical-stack
+      - entities:
+          - entity: sensor.bedroom_temprature
+        hours_to_show: 1
+        refresh_interval: 0
+        type: history-graph
+      - type: history-graph
+        entities:
+          - entity: binary_sensor.temp_rising
+          - entity: binary_sensor.temp_falling
+          - entity: input_boolean.temprature_stable
+        refresh_interval: 0
+        hours_to_show: 2
+      - type: custom:apexcharts-card
+        header:
+          show: true
+          title: ApexCharts-Card
+          show_states: true
+          colorize_states: true
+        series:
+          - entity: sensor.bedroom_temprature
+            stroke_width: 1
+          - entity: sensor.dark_sky_temperature
+            type: column
+            stroke_width: 6
+            group_by:
+              func: avg
+              duration: 30min
   - badges: []
     cards:
-      - aspect_ratio: 59%
+      - aspect_ratio: 76%
         type: iframe
-        url: 'http://192.168.0.15:8888/devices/set-to-no-segments-before-use'
-      - entity: light.wled
-        type: light
-      - cards:
+        url: http://192.168.1.56:8888/dashboard
+      - type: entities
+        entities:
+          - entity: input_select.ledfx_scene
+      - type: grid
+        cards:
           - aspect_ratio: 1/1
             entity: script.ukf2020
             image: >-
@@ -282,7 +659,7 @@ views:
             type: picture-entity
           - aspect_ratio: 1/1
             entity: script.dreamy
-            image: 'https://i.imgur.com/LxCHYN0.jpg'
+            image: https://i.imgur.com/LxCHYN0.jpg
             show_name: true
             show_state: false
             state_filter:
@@ -291,8 +668,6 @@ views:
             tap_action:
               action: toggle
             type: picture-entity
-        type: horizontal-stack
-      - cards:
           - aspect_ratio: 1/1
             entity: script.modestep
             image: >-
@@ -307,7 +682,7 @@ views:
             type: picture-entity
           - aspect_ratio: 1/1
             entity: script.mteden
-            image: 'https://i.imgur.com/1a6R0Tq.jpg'
+            image: https://i.imgur.com/1a6R0Tq.jpg
             show_name: true
             show_state: false
             state_filter:
@@ -316,11 +691,12 @@ views:
             tap_action:
               action: toggle
             type: picture-entity
-        type: horizontal-stack
-      - cards:
+        columns: 2
+      - type: grid
+        cards:
           - aspect_ratio: 1/1
             entity: script.mando
-            image: 'https://i.imgur.com/MFE7dO7.jpg'
+            image: https://i.imgur.com/MFE7dO7.jpg
             show_name: true
             show_state: false
             state_filter:
@@ -331,7 +707,7 @@ views:
             type: picture-entity
           - aspect_ratio: 1/1
             entity: script.skyrim
-            image: 'https://i.imgur.com/Bm4i4lY.jpg'
+            image: https://i.imgur.com/Bm4i4lY.jpg
             show_name: false
             show_state: false
             state_filter:
@@ -340,11 +716,9 @@ views:
             tap_action:
               action: toggle
             type: picture-entity
-        type: horizontal-stack
-      - cards:
           - aspect_ratio: 1/1
             entity: script.burnout
-            image: 'https://i.imgur.com/3I8p3FO.png'
+            image: https://i.imgur.com/3I8p3FO.png
             show_name: false
             show_state: false
             state_filter:
@@ -365,20 +739,24 @@ views:
             tap_action:
               action: toggle
             type: picture-entity
-        type: horizontal-stack
-    icon: 'mdi:microphone-variant'
+        square: true
+        columns: 2
+    icon: mdi:microphone-variant
     path: ''
     title: DJ
-  - badges: []
-    cards:
-      - aspect_ratio: 43%
-        type: iframe
-        url: 'http://192.168.0.15:8080'
-    icon: 'mdi:alpha-k-circle'
+  - icon: mdi:kodi
     panel: true
     path: kodi
     title: Kodi
-  - badges: []
+    badges: []
+    cards:
+      - aspect_ratio: 43%
+        type: iframe
+        url: http://kodi:cam@192.168.1.56:8080
+  - icon: mdi:apple-icloud
+    path: Outdoors
+    title: Outdoors
+    badges: []
     cards:
       - cards:
           - entity: sensor.pm2_5
@@ -413,185 +791,289 @@ views:
           - entity: sensor.northern
           - entity: sensor.london_overground
         type: entities
-      - type: 'custom:weather-card'
-        entity: weather.dark_sky
-        details: false
-        forecast: true
-      - type: iframe
+      - aspect_ratio: 75%
+        type: iframe
         url: >-
-          https://s3-eu-west-1.amazonaws.com/jamcams.tfl.gov.uk/00001.09560.mp4?i=vmwy0
-        aspect_ratio: 75%
-      - type: iframe
+          https://s3-eu-west-1.amazonaws.com/jamcams.tfl.gov.uk/00001.09560.mp4?loop=%221%22
+      - aspect_ratio: 75%
+        type: iframe
         url: >-
           https://s3-eu-west-1.amazonaws.com/jamcams.tfl.gov.uk/00001.09551.mp4?i=gr9px
-        aspect_ratio: 75%
-    icon: 'mdi:apple-icloud'
-    path: climate
-    title: Climate
-  - icon: 'mdi:radar'
-    panel: true
-    title: Radar
-    badges: []
+      - entity: weather.home
+        type: weather-forecast
+      - type: iframe
+        url: http://wsn.spaceflight.esa.int/iss/index_portal.php
+  - badges: []
     cards:
       - aspect_ratio: 43%
         type: iframe
         url: >-
           https://embed.windy.com/embed2.html?lat=53.278&lon=-3.296&zoom=5&level=surface&overlay=rain&menu=&message=true&marker=&calendar=&pressure=&type=map&location=coordinates&detail=&detailLat=51.552&detailLon=-0.135&metricWind=mph&metricTemp=default&radarRange=-1"
           frameborder="0"></iframe> 
+    icon: mdi:radar
+    panel: true
+    title: Radar
   - badges: []
     cards:
       - aspect_ratio: 43%
         type: iframe
         url: >-
           https://gisanddata.maps.arcgis.com/apps/opsdashboard/index.html#/bda7594740fd40299423467b48e9ecf6
-    icon: 'mdi:bacteria'
+    icon: mdi:bacteria
     panel: true
     path: ncov
     title: nCoV
   - badges: []
     cards:
-      - entity: switch.ledfx
-        hold_action:
-          action: more-info
-        show_icon: true
-        show_name: true
-        tap_action:
-          action: toggle
-        type: entity-button
+      - aspect_ratio: 100%
+        type: iframe
+        url: http://192.168.1.160
+      - aspect_ratio: 100%
+        type: iframe
+        url: http://192.168.1.13
+      - aspect_ratio: 100%
+        type: iframe
+        url: http://192.168.1.56:8888/dashboard
+    icon: mdi:card-bulleted-outline
+    path: webui-links
+    title: WebUi Links
+  - badges: []
+    cards:
+      - card:
+          entities:
+            - entity: binary_sensor.temp_falling
+          type: entities
+        conditions:
+          - entity: binary_sensor.temp_falling
+            state: 'on'
+        type: conditional
+      - card:
+          entities:
+            - entity: binary_sensor.temp_rising
+          type: entities
+        conditions:
+          - entity: binary_sensor.temp_rising
+            state: 'on'
+        type: conditional
       - cards:
-          - aspect_ratio: 2/1
-            entity: switch.timer
-            icon: 'mdi:camera-timer'
-            type: 'custom:button-card'
-          - aspect_ratio: 2/1
-            entity: switch.wind
-            icon: 'mdi:weather-windy'
-            type: 'custom:button-card'
-          - aspect_ratio: 2/1
-            entity: switch.power
-            icon: 'mdi:signal'
-            type: 'custom:button-card'
-          - aspect_ratio: 2/1
-            entity: switch.swing
-            icon: 'mdi:arrow-left-right'
-            type: 'custom:button-card'
+          - card:
+              aspect_ratio: 4/1
+              entity: binary_sensor.temp_falling
+              icon: mdi:arrow-down-bold
+              type: custom:button-card
+            conditions:
+              - entity: binary_sensor.temp_falling
+                state: 'on'
+            type: conditional
+          - card:
+              aspect_ratio: 4/1
+              entity: binary_sensor.temp_rising
+              icon: mdi:arrow-up-bold
+              type: custom:button-card
+            conditions:
+              - entity: binary_sensor.temp_rising
+                state: 'on'
+            type: conditional
+          - card:
+              aspect_ratio: 4/1
+              entity: input_boolean.temprature_stable
+              icon: mdi:arrow-left-right-bold
+              type: custom:button-card
+            conditions:
+              - entity: input_boolean.temprature_stable
+                state: 'on'
+            type: conditional
         type: horizontal-stack
-      - entities: []
-        hours_to_show: 24
-        refresh_interval: 0
-        type: history-graph
+      - type: media-control
+        entity: media_player.kodi
       - cards:
-          - entity: sensor.pm2_5
-            max: 100
-            min: 0
-            severity:
-              green: 0
-              red: 300
-              yellow: 50
-            theme: default
-            type: gauge
-          - entity: sensor.pm10
-            max: 100
-            min: 0
-            severity:
-              green: 0
-              red: 50
-              yellow: 30
-            theme: default
-            type: gauge
-          - entity: sensor.n02
-            max: 100
-            min: 0
-            severity:
-              green: 0
-              red: 50
-              yellow: 20
-            theme: default
-            type: gauge
-        type: horizontal-stack
-      - entities:
-          - entity: sensor.pm2_5
-          - entity: sensor.pm10
-          - entity: sensor.n02
-        type: entities
-      - entity: switch.tv
-        icon: 'mdi:television-classic'
-        show_icon: true
-        show_name: false
-        tap_action:
-          action: toggle
-        type: entity-button
-        icon_height: 50px
-      - entity: script.easein
-        hold_action:
-          action: more-info
-        icon: 'mdi: sun'
-        show_icon: true
-        show_name: true
-        tap_action:
-          action: toggle
-        type: entity-button
-      - cards:
-          - aspect_ratio: 1/1
-            entity: script.modestep
-            image: >-
-              https://brainlessbeats.files.wordpress.com/2012/12/modestep.jpg?w=920
+          - aspect_ratio: 2/1
+            entity: script.kodi_volume_up_5
             show_name: false
-            show_state: false
-            state_filter:
-              'off': brightness(100%) saturate(1)
-              'on': brightness(110%) saturate(1.2)
-            tap_action:
-              action: toggle
-            type: picture-entity
-          - aspect_ratio: 1/1
-            entity: script.kodi_party
-            image: >-
-              https://cdn.shopify.com/s/files/1/0279/8335/products/D4Q3597_grande_d20e2084-91b6-48d2-92c8-0339b78c78cd_grande.png?v=1544456556
+            type: custom:button-card
+          - aspect_ratio: 2/1
+            entity: script.kodi_volume_down_5
             show_name: false
-            show_state: false
-            state_filter:
-              'off': brightness(100%) saturate(1)
-              'on': brightness(110%) saturate(1.2)
-            tap_action:
-              action: toggle
-            type: picture-entity
+            type: custom:button-card
+          - aspect_ratio: 2/1
+            entity: script.stop
+            show_name: false
+            type: custom:button-card
+          - aspect_ratio: 2/1
+            entity: script.kodi_repeat
+            show_name: false
+            type: custom:button-card
         type: horizontal-stack
-      - entities: []
-        hours_to_show: 24
-        refresh_interval: 0
-        type: history-graph
-      - entity: sensor.pm2_5
-        graph: line
-        type: sensor
-      - entities:
-          - entity: input_datetime.wakeup_time
-          - entity: input_boolean.wakeup_enabled
-          - entity: input_boolean.wakeup_weekend
-        title: Wakeup Lights
-        type: entities
-      - entity: switch.milight_nightlight
-        hold_action:
-          action: more-info
-        show_icon: true
-        show_name: false
+      - cards:
+          - aspect_ratio: 2/1
+            entity: script.kodi_volume_up_5
+            show_name: false
+            type: custom:button-card
+          - aspect_ratio: 2/1
+            entity: script.kodi_volume_down_5
+            show_name: false
+            type: custom:button-card
+        type: horizontal-stack
+      - type: vertical-stack
+        cards:
+          - cards:
+              - aspect_ratio: 4/1
+                entity: script.kodi_volume_up_5
+                show_name: false
+                type: custom:button-card
+              - aspect_ratio: 4/1
+                entity: script.kodi_volume_down_5
+                show_name: false
+                type: custom:button-card
+            type: horizontal-stack
+          - cards:
+              - aspect_ratio: 4/1
+                entity: script.stop
+                show_name: false
+                type: custom:button-card
+              - aspect_ratio: 4/1
+                entity: script.kodi_repeat
+                show_name: false
+                type: custom:button-card
+            type: horizontal-stack
+          - cards:
+              - aspect_ratio: 4/1
+                entity: script.kodi_playlist_test
+                show_name: false
+                type: custom:button-card
+              - aspect_ratio: 4/1
+                entity: script.play_the_sleep_album
+                show_name: false
+                type: custom:button-card
+            type: horizontal-stack
+      - type: button
         tap_action:
           action: toggle
-        type: entity-button
-        icon: 'mdi:weather-night'
-        icon_height: 50px
-      - entities:
-          - entity: switch.rave
-        type: entities
-      - entity: sensor.pm2_5
-        max: 100
-        min: 0
-        severity:
-          green: 0
-          red: 300
-          yellow: 50
-        theme: default
-        type: gauge
-    icon: 'mdi:beaker'
-    path: dev
-    title: DEV
+        entity: script.kodi_playlist_test
+      - type: button
+        tap_action:
+          action: toggle
+        entity: switch.outdoor_lights
+      - type: entities
+        entities:
+          - input_datetime.turn_off_outdoor_lights
+      - type: custom:mini-media-player
+        entity: media_player.kodi
+        artwork: cover
+        name: Kodi
+        icon: mdi:kodi
+        hide:
+          play_pause: false
+          play_stop: false
+          stop: false
+        shortcuts:
+          columns: 4
+          buttons:
+            - icon: mdi:minecraft
+              type: script
+              id: script.kodi_playlist_test
+            - icon: mdi:weather-night
+              type: script
+              id: script.play_the_sleep_album
+            - type: script
+              id: script.kodi_dub_playlist
+              icon: mdi:waveform
+            - icon: mdi:hours-24
+              type: script
+              id: script.bbc_news
+      - type: custom:time-picker-card
+        entity: input_datetime.turn_off_outdoor_lights
+        hour_mode: 12
+        hour_step: 1
+        minute_step: 5
+        name: ''
+        layout:
+          name: inside
+          align_controls: center
+          hour_mode: single
+        link_values: false
+        hide:
+          name: false
+      - type: custom:mini-media-player
+        entity: media_player.lg_webos_tv_72b2
+        tts:
+          platform: webos
+      - type: entity
+        entity: automation.wake_me_up_with_bedroom_light_transition_for_weekdays
+      - type: button
+        tap_action:
+          action: toggle
+        entity: automation.wake_me_up_with_bedroom_light_transition_for_weekdays
+      - type: iframe
+        url: >-
+          https://calendar.google.com/calendar/embed?height=400&wkst=2&bgcolor=%23ffffff&ctz=America%2FLos_Angeles&src=cDA3bjk4Z28xMW9uYW1kMDhkMGttcTZqaHNAZ3JvdXAuY2FsZW5kYXIuZ29vZ2xlLmNvbQ&color=%23039BE5&title=Release%20Schedule&mode=AGENDA&showPrint=0&showTabs=0&showCalendars=0&showTz=0&showNav=0&showDate=0&showTitle=1"
+        aspect_ratio: 50%
+      - type: custom:mini-media-player
+        entity: media_player.playstation_4
+        artwork: cover
+        name: PS4
+        icon: mdi:sony-playstation
+        source: full
+        hide:
+          play_pause: true
+          play_stop: true
+          stop: true
+          controls: true
+          volume: true
+          source: false
+        shortcuts:
+          hide_when_off: true
+          columns: 4
+          buttons:
+            - icon: mdi:close
+              type: service
+              id: ps4.send_command
+              data:
+                entity_id: media_player.playstation_4
+                command: enter
+            - icon: mdi:checkbox-blank-circle-outline
+              type: service
+              id: ps4.send_command
+              data:
+                entity_id: media_player.playstation_4
+                command: back
+            - icon: mdi:sony-playstation
+              type: service
+              id: ps4.send_command
+              data:
+                entity_id: media_player.playstation_4
+                command: ps
+            - icon: mdi:speaker
+              type: service
+              id: switch.toggle
+              data:
+                entity_id: switch.ps4_audio
+      - type: button
+        tap_action:
+          action: toggle
+        entity: switch.ps4_audio
+      - type: entities
+        entities:
+          - entity: device_tracker.pixel_5
+          - entity: sensor.pixel_5_battery_health
+          - entity: sensor.pixel_5_battery_state
+          - entity: sensor.pixel_5_charger_type
+          - entity: binary_sensor.pixel_5_is_charging
+          - entity: sensor.pixel_5_light_sensor
+          - entity: sensor.pixel_5_pressure_sensor
+          - entity: sensor.pixel_5_next_alarm
+      - type: logbook
+        entities:
+          - sensor.pixel_5_next_alarm
+        hours_to_show: 24
+      - type: button
+        tap_action:
+          action: toggle
+        entity: light.milights
+      - type: button
+        tap_action:
+          action: toggle
+        entity: switch.slow_fade
+    icon: mdi:beaker
+    path: conditional-lab
+    title: Conditional Lab
