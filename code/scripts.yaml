@@ -42,10 +42,11 @@ play:
 stop:
   alias: stop
   sequence:
-  - service: kodi.call_method
+  - service: media_player.media_stop
     data:
       entity_id: media_player.kodi
-      method: Player.Stop
+  mode: single
+  icon: mdi:stop
 ukf2020:
   alias: UKF2020
   sequence:
@@ -228,7 +229,7 @@ fanhack:
       entity_id: switch.swing
   - service: switch.turn_on
     data:
-      entity_id: switch.fan
+      entity_id: switch.air_cooler
 easein:
   alias: Fade the lights on
   sequence:
@@ -245,3 +246,278 @@ easeout:
       transition: 60
     entity_id: light.milights
     service: light.turn_off
+fadetest:
+  alias: FadeTest
+  mode: single
+  sequence:
+  - data:
+      transition: 10
+    entity_id: light.front
+    service: light.turn_on
+  - data:
+      transition: 10
+    entity_id: light.lamp
+    service: light.turn_on
+  - data:
+      transition: 10
+    entity_id: light.unit
+    service: light.turn_on
+kodi_playlist_test:
+  alias: Play the minecraft sleep playlist
+  sequence:
+  - service: kodi.call_method
+    data:
+      method: Playlist.Clear
+      playlistid: 0
+    target:
+      entity_id: media_player.kodi
+  - service: kodi.call_method
+    data:
+      method: Playlist.Add
+      playlistid: 0
+      item:
+        recursive: true
+        directory: special://profile/playlists/music/minecraft_sleep.m3u
+    target:
+      entity_id: media_player.kodi
+  - service: kodi.call_method
+    data:
+      method: Player.Open
+      item:
+        playlistid: 0
+        position: 0
+    target:
+      entity_id: media_player.kodi
+  - service: kodi.call_method
+    data:
+      method: Player.SetRepeat
+      playerid: 0
+      repeat: 'off'
+    target:
+      entity_id: media_player.kodi
+  mode: single
+  icon: mdi:minecraft
+bbc_news:
+  alias: BBC News
+  sequence:
+  - service: kodi.call_method
+    data:
+      method: Player.Open
+      item:
+        file: plugin://plugin.video.iplayerwww/?url=bbc_news24&mode=203&name=BBC+News+Channel&iconimage=C%3A%5CUsers%5CCam%5CAppData%5CRoaming%5CKodi%5Caddons%5Cplugin.video.iplayerwww%5Cmedia%5Cbbc_news24.png&description=&subtitles_url=&logged_in=False&time=1601895402.75
+    target:
+      entity_id: media_player.kodi
+  mode: single
+  icon: mdi:hours-24
+play_the_sleep_album:
+  alias: Play the Sleep Album & Loop
+  sequence:
+  - service: media_player.play_media
+    data:
+      media_content_id: '182'
+      media_content_type: album
+    target:
+      entity_id: media_player.homepc_2
+  - service: kodi.call_method
+    data:
+      method: Player.SetRepeat
+      playerid: 0
+      repeat: one
+    target:
+      entity_id: media_player.homepc_2
+  mode: single
+  icon: mdi:weather-night
+kodi_volume_up_5:
+  alias: Kodi Volume Up 5
+  sequence:
+  - service: media_player.volume_up
+    data: {}
+    entity_id: media_player.kodi
+  - service: media_player.volume_up
+    data: {}
+    entity_id: media_player.kodi
+  - service: media_player.volume_up
+    data: {}
+    entity_id: media_player.kodi
+  - service: media_player.volume_up
+    data: {}
+    entity_id: media_player.kodi
+  - service: media_player.volume_up
+    data: {}
+    entity_id: media_player.kodi
+  mode: single
+  icon: mdi:plus
+kodi_volume_down_5:
+  alias: Kodi Volume Down 5
+  sequence:
+  - service: media_player.volume_down
+    data: {}
+    entity_id: media_player.kodi
+  - service: media_player.volume_down
+    data: {}
+    entity_id: media_player.kodi
+  - service: media_player.volume_down
+    data: {}
+    entity_id: media_player.kodi
+  - service: media_player.volume_down
+    data: {}
+    entity_id: media_player.kodi
+  - service: media_player.volume_down
+    data: {}
+    entity_id: media_player.kodi
+  mode: single
+  icon: mdi:minus
+kodi_repeat:
+  alias: Kodi Repeat
+  sequence:
+  - service: kodi.call_method
+    data:
+      method: Player.SetRepeat
+      playerid: 0
+      repeat: cycle
+    entity_id: media_player.kodi
+  mode: single
+  icon: mdi:repeat
+news:
+  alias: news
+  sequence:
+  - service: kodi.call_method
+    data:
+      method: Playlist.Clear
+      playlistid: 0
+    entity_id: media_player.kodi
+  - service: kodi.call_method
+    data:
+      method: Playlist.Insert
+      playlistid: 0
+      postition: 0
+      item:
+        file: plugin://plugin.video.iplayerwww/?url=bbc_news24&mode=203
+        playlistid: 0
+        postition: 0
+    entity_id: media_player.kodi
+  - service: kodi.call_method
+    data:
+      method: Player.Open
+      item:
+        playlistid: 0
+        position: 0
+    entity_id: media_player.kodi
+  mode: single
+kodi_dub_playlist:
+  alias: Play the dub playlist
+  sequence:
+  - service: kodi.call_method
+    data:
+      entity_id: media_player.kodi
+      method: Playlist.Clear
+      playlistid: 0
+  - service: kodi.call_method
+    data:
+      method: Playlist.Add
+      playlistid: 0
+      item:
+        recursive: true
+        directory: special://profile/playlists/music/Dub.xsp
+    entity_id: media_player.kodi
+  - service: kodi.call_method
+    data:
+      method: Player.Open
+      item:
+        playlistid: 0
+        position: 0
+    entity_id: media_player.kodi
+  mode: single
+  icon: mdi:waveform
+long_fade:
+  alias: Long Fade On
+  sequence:
+  - data:
+      brightness: 200
+      transition: 600
+    entity_id: light.milightsselect
+    service: light.turn_on
+  mode: single
+long_fade_off:
+  alias: Long Fade Off
+  sequence:
+  - data:
+      transition: 600
+    entity_id: light.milightsselect
+    service: light.turn_off
+  mode: single
+  icon: mdi:weather-sunset-down
+'1625942409287':
+  alias: Sleep Album 2
+  sequence:
+  - data:
+      entity_id: media_player.kodi
+      method: Playlist.Clear
+      playlistid: 0
+    service: kodi.call_method
+  - data:
+      media_id: '182'
+      media_type: ALBUM
+    service: kodi.add_to_playlist
+    target:
+      entity_id: media_player.kodi
+  - data:
+      entity_id: media_player.kodi
+      item:
+        playlistid: 0
+      method: Player.Open
+    service: kodi.call_method
+  - service: kodi.call_method
+    data:
+      method: Player.SetRepeat
+      playerid: 0
+      repeat: one
+    target:
+      entity_id: media_player.kodi
+  mode: single
+ledfx_orange:
+  alias: LedFx Orange
+  sequence:
+  - service: shell_command.ledfxorange
+  mode: single
+ledfx_rainbow:
+  sequence:
+  - service: shell_command.ledfxrainbow
+  mode: single
+  alias: LedFX Rainbow
+ledfxdummy:
+  sequence:
+  - delay:
+      hours: 0
+      minutes: 0
+      seconds: 1
+      milliseconds: 0
+  mode: single
+  alias: 'LedFx Set '
+manual_air_clean:
+  alias: Manual Air Clean
+  sequence:
+  - service: fan.set_percentage
+    target:
+      entity_id: fan.bedroom_air_purifier
+    data:
+      percentage: 100
+  - delay:
+      hours: 0
+      minutes: 15
+      seconds: 0
+      milliseconds: 0
+  - service: fan.set_percentage
+    data:
+      percentage: 50
+  - delay:
+      hours: 0
+      minutes: 15
+      seconds: 0
+      milliseconds: 0
+  - service: fan.set_preset_mode
+    target:
+      entity_id: fan.bedroom_air_purifier
+    data:
+      preset_mode: auto
+  mode: single
